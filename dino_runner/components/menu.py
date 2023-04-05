@@ -12,7 +12,7 @@ class Menu:
         self.text = self.font.render(message, True, (0, 0, 0))
         self.text_rect = self.text.get_rect()
         self.text_rect.center = (self.half_screen_width, self.half_screen_height)
-
+        
     def update(self, game):
         self.handle_events_on_menu(game)
         pygame.display.update()
