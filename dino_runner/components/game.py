@@ -5,12 +5,13 @@ from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.utils.constants import DEFAULT_TYPE
 
-from dino_runner.utils.constants import BG, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import BG, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, HAMMER
 from dino_runner.components.dinosaur import Dinosour
 
 
 class Game:
     GAME_SPEED = 20
+
     def __init__(self):
         pygame.init()
         pygame.display.set_caption(TITLE)
@@ -21,7 +22,7 @@ class Game:
         self.game_speed = self.GAME_SPEED
         self.x_pos_bg = 0
         self.y_pos_bg = 380
-        self.player = Dinosour()
+        self.player = Dinosour(self.screen)
         self.obstacle_manager = ObstacleManager()
         self.menu = Menu(self.screen)
         self.running = False
@@ -60,6 +61,7 @@ class Game:
         self.obstacle_manager.update(self)
         self.update_score()
         self.power_up_manager.update(self)
+        
 
     def draw(self):
         self.clock.tick(FPS)
@@ -86,15 +88,19 @@ class Game:
         self.menu.reset_screen_color(self.screen)
         half_screen_width = SCREEN_WIDTH // 2
         half_screen_height = SCREEN_HEIGHT // 2
-        self.screen.blit(ICON, (half_screen_width - 50, half_screen_height - 140))
+        self.screen.blit(ICON, (half_screen_width -
+                         50, half_screen_height - 140))
         if self.death_count.count == 0:
             self.menu.draw(self.screen, 'Press any key to start')
         else:
             self.update_highest_score()
             self.menu.draw(self.screen, 'Game Over')
-            self.menu.draw(self.screen, f'Score: {self.score.count}', half_screen_width, 350)
-            self.menu.draw(self.screen, f'Deaths: {self.death_count.count}', half_screen_width, 400)
-            self.menu.draw(self.screen, f'Highest Score: {self.highest_score.count}', half_screen_width, 500)
+            self.menu.draw(
+                self.screen, f'Score: {self.score.count}', half_screen_width, 350)
+            self.menu.draw(
+                self.screen, f'Deaths: {self.death_count.count}', half_screen_width, 400)
+            self.menu.draw(
+                self.screen, f'Highest Score: {self.highest_score.count}', half_screen_width, 500)
         self.menu.update(self)
 
     def update_score(self):
@@ -115,9 +121,11 @@ class Game:
 
     def draw_power_up(self):
         if self.player.has_power_up:
-            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks())/1000, 2)
+            time_to_show = round(
+                (self.player.power_up_time - pygame.time.get_ticks())/1000, 2)
             if time_to_show >= 0:
-                self.menu.draw(self.screen, f'{self.player.type.capitalize()} enabled for {time_to_show} seconds', 500, 50)
+                self.menu.draw(
+                    self.screen, f'{self.player.type.capitalize()} enabled for {time_to_show} seconds', 500, 50)
             else:
                 self.player.has_power_up = False
-                self.player.type = DEFAULT_TYPE    
+                self.player.type = DEFAULT_TYPE
