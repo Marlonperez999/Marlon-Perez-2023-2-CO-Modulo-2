@@ -5,7 +5,7 @@ from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.utils.constants import DEFAULT_TYPE
 
-from dino_runner.utils.constants import BG, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, HAMMER
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, HAMMER
 from dino_runner.components.dinosaur import Dinosour
 
 
@@ -61,7 +61,7 @@ class Game:
         self.obstacle_manager.update(self)
         self.update_score()
         self.power_up_manager.update(self)
-        
+        self.obstacle_manager.throw_hammer(user_input)
 
     def draw(self):
         self.clock.tick(FPS)

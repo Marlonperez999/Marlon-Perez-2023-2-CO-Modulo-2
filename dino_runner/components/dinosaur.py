@@ -1,7 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 from dino_runner.components.power_ups.hammer_up import HammerUp
-from dino_runner.utils.constants import DUCKING, RUNNING, JUMPING, DUCKING_SHIELD, RUNNING_SHIELD, JUMPING_HAMMER, HAMMER, DUCKING_HAMMER, JUMPING_SHIELD, DEFAULT_TYPE, SHIELD_TYPE, HAMMER_TYPE, RUNNING_HAMMER
+from dino_runner.utils.constants import DUCKING, RUNNING, JUMPING, DUCKING_SHIELD, RUNNING_SHIELD, JUMPING_HAMMER,  DUCKING_HAMMER, JUMPING_SHIELD, DEFAULT_TYPE, SHIELD_TYPE, HAMMER_TYPE, RUNNING_HAMMER
 
 RUN_IMAGE = {DEFAULT_TYPE: RUNNING,
              SHIELD_TYPE: RUNNING_SHIELD, HAMMER_TYPE: RUNNING_HAMMER}
@@ -49,11 +49,11 @@ class Dinosour(Sprite):
             self.dino_jump = False
             self.dino_run = False
             self.dino_duck = True
-        elif user_input[pygame.K_SPACE] and not self.dino_jump and self.has_power_up and self.power_up_time > 0:
-            self.dino_jump = False
-            self.dino_run = True
-            self.dino_duck = False
-            self.hammer.draw(self.screen)
+        # elif user_input[pygame.K_SPACE] and not self.dino_jump and self.has_power_up and self.power_up_time > 0:
+        #     self.dino_jump = False
+        #     self.dino_run = True
+        #     self.dino_duck = False
+        #     self.hammer.draw(self.screen)
         elif not self.dino_jump:
             self.dino_jump = False
             self.dino_run = True

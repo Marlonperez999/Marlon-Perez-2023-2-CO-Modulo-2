@@ -21,6 +21,5 @@ class PowerUp(Sprite):
         if self.rect.x <- self.rect.width:
             power_ups.pop()
 
-
     def draw(self, screen):
         screen.blit(self.image, self.rect)
